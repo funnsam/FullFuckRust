@@ -1,5 +1,10 @@
-linux:
-	rustc src/main.rs -o ffk --target x86_64-unknown-linux-gnu
+ifeq ($(OS), Windows_NT)
+	NAME = ffk.exe
+else ifeq ($(shell uname -s), Linux)
+	NAME = ffk
+else
+	NAME = ffku
+endif
 
-windows:
-	rustc src/main.rs -o ffk.exe --target x86_64-pc-windows-gnu
+all:
+	rustc src/main.rs -o $(NAME)
