@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: ima debuggin
+      run: ls
+
+    steps:
     - name: Build for Windows
       run: rustc ./src/main.rs -o ffk.exe --target x86_64-pc-windows-gnu
 
