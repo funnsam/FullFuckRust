@@ -7,4 +7,4 @@ else
 endif
 
 all:
-	rustc src/main.rs -o $(NAME)
+	rustc ./src/main.rs -o $(NAME)

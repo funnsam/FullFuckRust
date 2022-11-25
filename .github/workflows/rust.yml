@@ -16,10 +16,10 @@ jobs:
 
     steps:
     - name: Build for Windows
-      run: rustc src/main.rs -o ffk.exe --target x86_64-pc-windows-gnu
+      run: rustc ./src/main.rs -o ffk.exe --target x86_64-pc-windows-gnu
 
     - name: Build for Linux
-      run: rustc src/main.rs -o ffk --target x86_64-unknown-linux-gnu
+      run: rustc ./src/main.rs -o ffk --target x86_64-unknown-linux-gnu
       
     - name: 'Upload Linux'
       uses: actions/upload-artifact@v3
