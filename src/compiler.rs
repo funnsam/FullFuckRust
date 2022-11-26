@@ -190,7 +190,20 @@ pub fn compile(mut input: Vec<u8>, no_hlt_enabled: bool) -> String {
                         
                         TokenType::OpenLoop
                     },  // [
-                    93                  => TokenType::EndLoop,  // ]
+                    93                  => {
+                        loop_layer -= 1;
+
+                        let curr_tok:Token = Token {
+                            token_type      : TokenType::EndLoop,
+                            loop_id         : loop_stack.pop().unwrap(),
+                            loop_layer      : loop_layer
+                        };
+                
+                        prev_tok = curr_tok.clone();
+                        token_list.push(curr_tok);
+
+                        continue;
+                    },  // ]
         
                     48                  => {
                         if be_number {
@@ -274,11 +287,6 @@ pub fn compile(mut input: Vec<u8>, no_hlt_enabled: bool) -> String {
 
         prev_tok = curr_tok.clone();
         token_list.push(curr_tok);
-
-        if *el == 93 {
-            loop_layer -= 1;
-            loop_id = loop_stack.pop().unwrap();
-        }
     }
 
     // Optimize LV.1: Unroll
